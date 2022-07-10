@@ -35,6 +35,7 @@ class _NoteModifyState extends State<NoteModify> {
 
       note = response.data;
       _titleController.text = note!.noteTitle.toString();
+      _contentController.text = note!.noteContent.toString();
     });
     super.initState();
   }
@@ -57,8 +58,9 @@ class _NoteModifyState extends State<NoteModify> {
             const SizedBox(
               height: 8,
             ),
-            const TextField(
-              decoration: InputDecoration(hintText: 'Note content'),
+             TextField(
+              decoration: const InputDecoration(hintText: 'Note content'),
+              controller: _contentController,
             ),
             const SizedBox(height: 16),
             SizedBox(
