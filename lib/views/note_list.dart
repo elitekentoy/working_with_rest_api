@@ -53,6 +53,15 @@ class _NoteListState extends State<NoteList> {
       ),
       body: Builder(
         builder: (_) {
+          if (_isloading) {
+            return const CircularProgressIndicator();
+          }
+
+          //SHADY
+          if (_apiResponse.error == true) {
+            return Center(child: Text(_apiResponse.errorMessage.toString()));
+          }
+
           return ListView.separated(
             separatorBuilder: (_, __) =>
                 const Divider(height: 1, color: Colors.green),
