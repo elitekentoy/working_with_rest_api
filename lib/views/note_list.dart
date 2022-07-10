@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:working_with_rest_api/models/note_for_listing.dart';
+import 'package:working_with_rest_api/services/notes_service.dart';
 import 'package:working_with_rest_api/views/note_delete.dart';
 import 'package:working_with_rest_api/views/note_modify.dart';
 
@@ -26,6 +27,9 @@ class NoteList extends StatelessWidget {
       noteTitle: "Note 3"
     ),
   ];
+
+  final service = NotesService();
+  
 
   String formatDateTime(DateTime? dateTime){
     return '${dateTime!.day}/${dateTime.month}/${dateTime.year}';
