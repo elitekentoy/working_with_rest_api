@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:working_with_rest_api/services/notes_service.dart';
 
+import '../models/note.dart';
+
 class NoteModify extends StatefulWidget {
   const NoteModify({Key? key, this.noteID}) : super(key: key);
 
@@ -16,6 +18,22 @@ class _NoteModifyState extends State<NoteModify> {
   bool get isEditing => widget.noteID != null;
 
   NotesService get notesService => GetIt.I<NotesService>(); 
+
+  String? errorMessage;
+  Note? note;
+
+  @override
+  void initState() {
+    notesService.getNote(widget.noteID.toString()).then((response) {
+      if(response.error == true){
+        errorMessage = response.errorMessage ?? 'An error occured';
+      }
+
+      note = response.data;
+    });
+    super.initState();
+  }
+
 
 
 
