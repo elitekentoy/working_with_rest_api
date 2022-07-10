@@ -55,7 +55,7 @@ class _NoteListState extends State<NoteList> {
       body: Builder(
         builder: (_) {
           if (_isloading) {
-            return const CircularProgressIndicator();
+            return const Center(child:  CircularProgressIndicator());
           }
 
           //SHADY
