@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:working_with_rest_api/models/note_for_listing.dart';
 
 class NoteList extends StatelessWidget {
   const NoteList({Key? key}) : super(key: key);
