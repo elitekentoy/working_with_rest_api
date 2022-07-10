@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 
-class NoteModify extends StatelessWidget {
+class NoteModify extends StatefulWidget {
   const NoteModify({Key? key, this.noteID}) : super(key: key);
 
 
   final String? noteID;
-  bool get isEditing => noteID != null;
+
+  @override
+  State<NoteModify> createState() => _NoteModifyState();
+}
+
+class _NoteModifyState extends State<NoteModify> {
+  bool get isEditing => widget.noteID != null;
 
   @override
   Widget build(BuildContext context) {
