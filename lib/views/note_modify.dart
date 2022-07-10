@@ -86,11 +86,19 @@ class _NoteModifyState extends State<NoteModify> {
                         if (isEditing) {
                           //update Note
                         } else {
+                          setState(() {
+                            _isloading = true;
+                          });
+
                           final note = NoteInsert(
                             noteTitle: _titleController.text,
                             noteContent: _contentController.text,
                           );
                           final result = await notesService.createNote(note);
+
+                          setState(() {
+                            _isloading = false;
+                          });
 
                           final title = 'Done';
                           final text = result.error! ? (result.errorMessage ?? 'An error occured') : 'Your note was created.' ;
