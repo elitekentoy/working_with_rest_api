@@ -13,7 +13,6 @@ class NoteList extends StatefulWidget {
 }
 
 class _NoteListState extends State<NoteList> {
-  List<NoteForListing> notes = [];
 
   NotesService get service => GetIt.I<NotesService>();
 
@@ -23,7 +22,7 @@ class _NoteListState extends State<NoteList> {
 
   @override
   void initState() {
-    notes = service.getNoteList();
+    
     super.initState();
   }
 
