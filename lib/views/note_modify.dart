@@ -32,7 +32,15 @@ class _NoteModifyState extends State<NoteModify> {
   @override
   void initState() {
 
+    setState(() {
+      _isloading = true;
+    });
+
     notesService.getNote(widget.noteID.toString()).then((response) {
+      setState(() {
+        _isloading = false;
+      });
+
       if(response.error == true){
         errorMessage = response.errorMessage ?? 'An error occured';
       }
