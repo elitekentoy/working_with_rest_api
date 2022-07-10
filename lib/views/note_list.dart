@@ -5,9 +5,14 @@ import 'package:working_with_rest_api/services/notes_service.dart';
 import 'package:working_with_rest_api/views/note_delete.dart';
 import 'package:working_with_rest_api/views/note_modify.dart';
 
-class NoteList extends StatelessWidget {
+class NoteList extends StatefulWidget {
   NoteList({Key? key}) : super(key: key);
 
+  @override
+  State<NoteList> createState() => _NoteListState();
+}
+
+class _NoteListState extends State<NoteList> {
   final notes = [
     NoteForListing(
       noteID: "1",
