@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:working_with_rest_api/models/api_response.dart';
 import 'package:working_with_rest_api/models/note_for_listing.dart';
 import 'package:working_with_rest_api/services/notes_service.dart';
 import 'package:working_with_rest_api/views/note_delete.dart';
@@ -13,18 +14,31 @@ class NoteList extends StatefulWidget {
 }
 
 class _NoteListState extends State<NoteList> {
-  List<NoteForListing> notes = [];
-
   NotesService get service => GetIt.I<NotesService>();
 
-  String formatDateTime(DateTime? dateTime){
+  bool _isloading = false;
+  late APIResponse<List<NoteForListing>> _apiResponse;
+
+  String formatDateTime(DateTime? dateTime) {
     return '${dateTime!.day}/${dateTime.month}/${dateTime.year}';
   }
 
   @override
   void initState() {
-    notes = service.getNoteList();
+    _fetchNotes();
     super.initState();
+  }
+
+  _fetchNotes() async {
+    setState(() {
+      _isloading = true;
+    });
+
+    _apiResponse = await service.getNoteList();
+
+    setState(() {
+      _isloading = false;
+    });
   }
 
   @override
@@ -33,47 +47,65 @@ class _NoteListState extends State<NoteList> {
       appBar: AppBar(title: const Text('List of Notes')),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (_) => const NoteModify()));
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (_) => const NoteModify()));
         },
         child: const Icon(Icons.add),
       ),
-      body: ListView.separated(
-        separatorBuilder: (_, __) => const Divider(height: 1, color: Colors.green),
-        itemBuilder: (_, index) {
-          return Dismissible(
-            key: ValueKey(notes[index].noteID),
-            direction: DismissDirection.startToEnd,
-            onDismissed: (direction) {
+      body: Builder(
+        builder: (_) {
+          if (_isloading) {
+            return const Center(child:  CircularProgressIndicator());
+          }
 
-            },
-            confirmDismiss: (direction) async {
-              final result = await showDialog(
-                context: context,
-                builder: (_) => const NoteDelete()
+          //SHADY
+          if (_apiResponse.error == true) {
+            return Center(child: Text(_apiResponse.errorMessage.toString()));
+          }
+
+          return ListView.separated(
+            separatorBuilder: (_, __) =>
+                const Divider(height: 1, color: Colors.green),
+            itemBuilder: (_, index) {
+              return Dismissible(
+                key: ValueKey(_apiResponse.data![index].noteID),
+                direction: DismissDirection.startToEnd,
+                onDismissed: (direction) {},
+                confirmDismiss: (direction) async {
+                  final result = await showDialog(
+                      context: context, builder: (_) => const NoteDelete());
+                  return result;
+                },
+                background: Container(
+                  color: Colors.red,
+                  padding: const EdgeInsets.only(left: 16),
+                  child: const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                child: ListTile(
+                  title: Text(
+                    _apiResponse.data![index].noteTitle.toString(),
+                    style: TextStyle(color: Theme.of(context).primaryColor),
+                  ),
+                  subtitle: Text(
+                      'Last edited on ${formatDateTime(_apiResponse.data![index].latestEditDateTime ?? _apiResponse.data![index].createDateTime)}'),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) => NoteModify(
+                              noteID: _apiResponse.data![index].noteID,
+                            )));
+                  },
+                ),
               );
-              return result;
             },
-            background: Container(
-              color: Colors.red,
-              padding: const EdgeInsets.only(left: 16),
-              child: const Align(
-                alignment: Alignment.centerLeft,
-                child: Icon(Icons.delete, color: Colors.white,),
-              ),
-            ),
-            child: ListTile(
-              title: Text(
-                notes[index].noteTitle.toString(),
-                style: TextStyle(color: Theme.of(context).primaryColor),
-              ),
-              subtitle: Text('Last edited on ${formatDateTime(notes[index].latestEditDateTime)}'),
-              onTap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (_) => NoteModify(noteID: notes[index].noteID,)));
-              },
-            ),
+            itemCount: _apiResponse.data!.length,
           );
         },
-        itemCount: notes.length,
       ),
     );
   }
