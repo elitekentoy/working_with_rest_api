@@ -12,7 +12,7 @@ class NotesService {
   static const headers = {
     'apiKey': '513101a3-f322-4751-966c-47616711ecb7',
     'Content-Type': 'application/json'
-    };
+  };
 
   Future<APIResponse<List<NoteForListing>>> getNoteList() {
     return http.get(Uri.parse(API + '/notes'), headers: headers).then((data) {
@@ -44,16 +44,29 @@ class NotesService {
             APIResponse<Note>(error: true, errorMessage: 'An error occured'));
   }
 
-  Future<APIResponse<bool>> createNote(NoteInsert item) {
+  Future<APIResponse<bool>> createNote(NoteManipulation item) {
     return http
-        .post(Uri.parse(API + '/notes'), headers: headers, body: json.encode(item.toJson()))
+        .post(Uri.parse(API + '/notes'),
+            headers: headers, body: json.encode(item.toJson()))
         .then((data) {
       if (data.statusCode == 201) {
-        final jsonData = json.decode(data.body);
         return APIResponse<bool>(data: true);
       }
       return APIResponse<bool>(error: true, errorMessage: 'An error occured');
     }).catchError((_) =>
             APIResponse<bool>(error: true, errorMessage: 'An error occured'));
   }
+
+  Future<APIResponse<bool>> updateNote(String noteID, NoteManipulation item) {
+    return http
+        .put(Uri.parse(API + '/notes/' + noteID), headers: headers, body: json.encode(item.toJson()))
+        .then((data) {
+      if (data.statusCode == 204) {
+        return APIResponse<bool>(data: true);
+      }
+      return APIResponse<bool>(error: true, errorMessage: 'An error occured');
+    }).catchError((_) =>
+            APIResponse<bool>(error: true, errorMessage: 'An error occured'));
+  }
+
 }
