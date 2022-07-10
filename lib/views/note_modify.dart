@@ -5,12 +5,12 @@ class NoteModify extends StatelessWidget {
 
 
   final String? noteID;
-
+  bool get isEditing => noteID != null;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(noteID == null ? 'Create note' : 'Edit note')),
+      appBar: AppBar(title: Text(isEditing ? 'Edit note' : 'Create note')),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
