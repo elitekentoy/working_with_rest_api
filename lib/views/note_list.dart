@@ -25,8 +25,8 @@ class NoteList extends StatelessWidget {
     ),
   ];
 
-  String formatDateTime(DateTime dateTime){
-    return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+  String formatDateTime(DateTime? dateTime){
+    return '${dateTime!.day}/${dateTime.month}/${dateTime.year}';
   }
 
   @override
@@ -45,7 +45,7 @@ class NoteList extends StatelessWidget {
               notes[index].noteTitle.toString(),
               style: TextStyle(color: Theme.of(context).primaryColor),
             ),
-            subtitle: Text('Last edited on ${notes[index].latestEditDateTime}'),
+            subtitle: Text('Last edited on ${formatDateTime(notes[index].latestEditDateTime)}'),
           );
         },
         itemCount: notes.length,
