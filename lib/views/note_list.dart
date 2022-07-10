@@ -48,7 +48,10 @@ class _NoteListState extends State<NoteList> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (_) => const NoteModify()));
+              .push(MaterialPageRoute(builder: (_) => const NoteModify()))
+              .then((_) {
+                _fetchNotes();
+              });
         },
         child: const Icon(Icons.add),
       ),
