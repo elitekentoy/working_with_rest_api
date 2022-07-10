@@ -59,7 +59,7 @@ class NotesService {
 
   Future<APIResponse<bool>> updateNote(String noteID, NoteManipulation item) {
     return http
-        .post(Uri.parse(API + '/notes/' + noteID), headers: headers, body: json.encode(item.toJson()))
+        .put(Uri.parse(API + '/notes/' + noteID), headers: headers, body: json.encode(item.toJson()))
         .then((data) {
       if (data.statusCode == 204) {
         return APIResponse<bool>(data: true);
