@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:json_serializable/builder.dart';
 
 part 'note_insert.g.dart';
 
@@ -14,10 +12,5 @@ class NoteManipulation{
     required this.noteContent,
   });
 
-  Map<String, dynamic> toJson(){
-    return{
-      "noteTitle": noteTitle,
-      "noteContent":noteContent,
-    };
-  }
+  Map<String, dynamic> toJson() => _$NoteManipulationToJson(this);
 }
