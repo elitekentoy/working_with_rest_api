@@ -25,6 +25,10 @@ class NoteList extends StatelessWidget {
     ),
   ];
 
+  String formatDateTime(DateTime dateTime){
+    return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
