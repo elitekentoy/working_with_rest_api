@@ -30,6 +30,13 @@ class _NoteListState extends State<NoteList> {
     super.initState();
   }
 
+  _fetchNotes() async {
+    setState(() {
+      _isloading = true;
+    });
+  }
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
