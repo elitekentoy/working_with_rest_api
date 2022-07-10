@@ -57,7 +57,7 @@ class _NoteListState extends State<NoteList> {
         separatorBuilder: (_, __) => const Divider(height: 1, color: Colors.green),
         itemBuilder: (_, index) {
           return Dismissible(
-            key: ValueKey(notes[index].noteID),
+            key: ValueKey(_apiResponse.data![index].noteID),
             direction: DismissDirection.startToEnd,
             onDismissed: (direction) {
 
@@ -79,17 +79,17 @@ class _NoteListState extends State<NoteList> {
             ),
             child: ListTile(
               title: Text(
-                notes[index].noteTitle.toString(),
+                _apiResponse.data![index].noteTitle.toString(),
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
-              subtitle: Text('Last edited on ${formatDateTime(notes[index].latestEditDateTime)}'),
+              subtitle: Text('Last edited on ${formatDateTime(_apiResponse.data![index].latestEditDateTime)}'),
               onTap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (_) => NoteModify(noteID: notes[index].noteID,)));
+                Navigator.of(context).push(MaterialPageRoute(builder: (_) => NoteModify(noteID: _apiResponse.data![index].noteID,)));
               },
             ),
           );
         },
-        itemCount: notes.length,
+        itemCount: _apiResponse.data!.length,
       ),
     );
   }
