@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
-
+import 'package:get_it/get_it.dart';
+import 'package:working_with_rest_api/services/notes_service.dart';
 import 'views/note_list.dart';
 
-void main () => runApp(const App());
+void setupLocator(){
+  GetIt.instance.registerLazySingleton(() => NotesService());
+}
+
+void main(){
+  setupLocator();
+  runApp(const App());
+}
 
 class  App extends StatelessWidget {
   const  App({ Key? key }) : super(key: key);
