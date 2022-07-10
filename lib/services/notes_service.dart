@@ -12,7 +12,7 @@ class NotesService {
   static const headers = {
     'apiKey': '513101a3-f322-4751-966c-47616711ecb7',
     'Content-Type': 'application/json'
-    };
+  };
 
   Future<APIResponse<List<NoteForListing>>> getNoteList() {
     return http.get(Uri.parse(API + '/notes'), headers: headers).then((data) {
@@ -46,10 +46,10 @@ class NotesService {
 
   Future<APIResponse<bool>> createNote(NoteInsert item) {
     return http
-        .post(Uri.parse(API + '/notes'), headers: headers, body: json.encode(item.toJson()))
+        .post(Uri.parse(API + '/notes'),
+            headers: headers, body: json.encode(item.toJson()))
         .then((data) {
       if (data.statusCode == 201) {
-        final jsonData = json.decode(data.body);
         return APIResponse<bool>(data: true);
       }
       return APIResponse<bool>(error: true, errorMessage: 'An error occured');
