@@ -44,7 +44,7 @@ class NotesService {
             APIResponse<Note>(error: true, errorMessage: 'An error occured'));
   }
 
-  Future<APIResponse<bool>> createNote(NoteInsert item) {
+  Future<APIResponse<bool>> createNote(NoteManipulation item) {
     return http
         .post(Uri.parse(API + '/notes'),
             headers: headers, body: json.encode(item.toJson()))
@@ -56,4 +56,7 @@ class NotesService {
     }).catchError((_) =>
             APIResponse<bool>(error: true, errorMessage: 'An error occured'));
   }
+
+
+
 }

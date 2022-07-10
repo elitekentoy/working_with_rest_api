@@ -90,7 +90,7 @@ class _NoteModifyState extends State<NoteModify> {
                             _isloading = true;
                           });
 
-                          final note = NoteInsert(
+                          final note = NoteManipulation(
                             noteTitle: _titleController.text,
                             noteContent: _contentController.text,
                           );
