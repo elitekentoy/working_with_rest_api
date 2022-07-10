@@ -101,22 +101,28 @@ class _NoteModifyState extends State<NoteModify> {
                           });
 
                           final title = 'Done';
-                          final text = result.error! ? (result.errorMessage ?? 'An error occured') : 'Your note was created.' ;
+                          final text = result.error!
+                              ? (result.errorMessage ?? 'An error occured')
+                              : 'Your note was created.';
 
                           showDialog(
                             context: context,
-                             builder: (_) => AlertDialog(
+                            builder: (_) => AlertDialog(
                               title: Text(title),
                               content: Text(text),
                               actions: <Widget>[
                                 TextButton(
-                                  onPressed: (){
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text('Ok'))
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text('Ok'))
                               ],
-                             ));
-
+                            ),
+                          ).then((data) {
+                            if(result.data!){
+                              Navigator.of(context).pop();
+                            }
+                          });
                         }
                       },
                       child: const Text(
