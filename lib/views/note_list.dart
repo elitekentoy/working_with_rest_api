@@ -53,7 +53,7 @@ class _NoteListState extends State<NoteList> {
         },
         child: const Icon(Icons.add),
       ),
-      body: ListView.separated(
+      body: _isloading ? CircularProgressIndicator() : ListView.separated(
         separatorBuilder: (_, __) => const Divider(height: 1, color: Colors.green),
         itemBuilder: (_, index) {
           return Dismissible(
