@@ -33,6 +33,7 @@ class _NoteModifyState extends State<NoteModify> {
       }
 
       note = response.data;
+      _titleController.text = note!.noteTitle.toString();
     });
     super.initState();
   }
@@ -48,8 +49,9 @@ class _NoteModifyState extends State<NoteModify> {
         padding: const EdgeInsets.all(12.0),
         child: Column(
           children: <Widget>[
-             const TextField(
-              decoration: InputDecoration(hintText: 'Note title'),
+              TextField(
+              decoration: const InputDecoration(hintText: 'Note title'),
+              controller: _titleController,
             ),
             const SizedBox(
               height: 8,
