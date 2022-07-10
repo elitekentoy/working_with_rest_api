@@ -5,8 +5,15 @@ class NoteList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return Scaffold(
+      appBar: AppBar(title: Text('List of Notes')),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+
+        },
+        child: const Icon(Icons.add),
+      ),
+      body: Container(),
     );
   }
 }
