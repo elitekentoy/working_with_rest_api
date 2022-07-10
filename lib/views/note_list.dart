@@ -81,13 +81,20 @@ class _NoteListState extends State<NoteList> {
                   if(result){
                     final deleteResult = await service.deleteNote(_apiResponse.data![index].noteID.toString());
 
-                    var message; 
-                    if (deleteResult != null && deleteResult.data == true){
+                    var message = ''; 
+                    if (deleteResult.data == true){
                        message = 'The note was deleted succesfully';
                     }
                     else {
                        message = deleteResult.errorMessage  ?? 'An error occured';
                     }
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(message),
+                      duration:  const Duration(milliseconds: 1000),)
+                    );
+
+                    return deleteResult.data ?? false;
                   }
 
                   return result;
