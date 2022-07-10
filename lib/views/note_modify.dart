@@ -26,8 +26,12 @@ class _NoteModifyState extends State<NoteModify> {
   TextEditingController _contentController = TextEditingController();
 
 
+  bool _isloading = false;
+
+
   @override
   void initState() {
+
     notesService.getNote(widget.noteID.toString()).then((response) {
       if(response.error == true){
         errorMessage = response.errorMessage ?? 'An error occured';
