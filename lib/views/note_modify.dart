@@ -23,6 +23,7 @@ class _NoteModifyState extends State<NoteModify> {
   Note? note;
 
   TextEditingController _titleController = TextEditingController();
+  TextEditingController _contentController = TextEditingController();
 
 
   @override
