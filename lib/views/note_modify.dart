@@ -55,7 +55,7 @@ class _NoteModifyState extends State<NoteModify> {
       appBar: AppBar(title: Text(isEditing ? 'Edit note' : 'Create note')),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Column(
+        child: _isloading ? const Center(child: CircularProgressIndicator(),) : Column(
           children: <Widget>[
             TextField(
               decoration: const InputDecoration(hintText: 'Note title'),
