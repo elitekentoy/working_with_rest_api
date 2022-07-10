@@ -38,13 +38,13 @@ class NoteList extends StatelessWidget {
         itemBuilder: (_, index) {
           return ListTile(
             title: Text(
-              'Hello',
+              notes[index].noteTitle.toString(),
               style: TextStyle(color: Theme.of(context).primaryColor),
             ),
-            subtitle: const Text('Last edited on 21/2/2021'),
+            subtitle: Text('Last edited on ${notes[index].latestEditDateTime}'),
           );
         },
-        itemCount: 30,
+        itemCount: notes.length,
       ),
     );
   }
