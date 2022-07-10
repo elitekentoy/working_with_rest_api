@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'views/note_list.dart';
+
 void main () => runApp(const App());
 
 class  App extends StatelessWidget {
@@ -12,28 +14,7 @@ class  App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue
       ),
-      home: const Home(),
-    );
-  }
-}
-
-
-
-class Home extends StatefulWidget {
-  const Home({ Key? key }) : super(key: key);
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Flutter Demo Home Page'),
-      ), 
-      body: Container(),
+      home: const NoteList(),
     );
   }
 }
