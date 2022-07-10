@@ -13,31 +13,18 @@ class NoteList extends StatefulWidget {
 }
 
 class _NoteListState extends State<NoteList> {
-  final notes = [
-    NoteForListing(
-      noteID: "1",
-      createDateTime: DateTime.now(),
-      latestEditDateTime: DateTime.now(),
-      noteTitle: "Note 1"
-    ),
-    NoteForListing(
-      noteID: "2",
-      createDateTime: DateTime.now(),
-      latestEditDateTime: DateTime.now(),
-      noteTitle: "Note 2"
-    ),
-    NoteForListing(
-      noteID: "3",
-      createDateTime: DateTime.now(),
-      latestEditDateTime: DateTime.now(),
-      noteTitle: "Note 3"
-    ),
-  ];
+  List<NoteForListing> notes = [];
 
   NotesService get service => GetIt.I<NotesService>();
 
   String formatDateTime(DateTime? dateTime){
     return '${dateTime!.day}/${dateTime.month}/${dateTime.year}';
+  }
+
+  @override
+  void initState() {
+    notes = service.getNoteList();
+    super.initState();
   }
 
   @override
