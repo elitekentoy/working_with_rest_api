@@ -7,7 +7,6 @@ import '../models/note.dart';
 class NoteModify extends StatefulWidget {
   const NoteModify({Key? key, this.noteID}) : super(key: key);
 
-
   final String? noteID;
 
   @override
@@ -17,7 +16,7 @@ class NoteModify extends StatefulWidget {
 class _NoteModifyState extends State<NoteModify> {
   bool get isEditing => widget.noteID != null;
 
-  NotesService get notesService => GetIt.I<NotesService>(); 
+  NotesService get notesService => GetIt.I<NotesService>();
 
   String? errorMessage;
   Note? note;
@@ -25,12 +24,11 @@ class _NoteModifyState extends State<NoteModify> {
   TextEditingController _titleController = TextEditingController();
   TextEditingController _contentController = TextEditingController();
 
-
   bool _isloading = false;
-
 
   @override
   void initState() {
+    super.initState();
 
     setState(() {
       _isloading = true;
@@ -41,7 +39,7 @@ class _NoteModifyState extends State<NoteModify> {
         _isloading = false;
       });
 
-      if(response.error == true){
+      if (response.error == true) {
         errorMessage = response.errorMessage ?? 'An error occured';
       }
 
@@ -49,11 +47,7 @@ class _NoteModifyState extends State<NoteModify> {
       _titleController.text = note!.noteTitle.toString();
       _contentController.text = note!.noteContent.toString();
     });
-    super.initState();
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -63,14 +57,14 @@ class _NoteModifyState extends State<NoteModify> {
         padding: const EdgeInsets.all(12.0),
         child: Column(
           children: <Widget>[
-              TextField(
+            TextField(
               decoration: const InputDecoration(hintText: 'Note title'),
               controller: _titleController,
             ),
             const SizedBox(
               height: 8,
             ),
-             TextField(
+            TextField(
               decoration: const InputDecoration(hintText: 'Note content'),
               controller: _contentController,
             ),
@@ -82,8 +76,9 @@ class _NoteModifyState extends State<NoteModify> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text('Submit',
-                style: TextStyle(color: Colors.white),
+                child: const Text(
+                  'Submit',
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ),
