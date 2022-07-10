@@ -1,5 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:json_serializable/builder.dart';
 
+part 'note_insert.g.dart';
+
+@JsonSerializable()
 class NoteManipulation{
   String noteTitle;
   String noteContent;
