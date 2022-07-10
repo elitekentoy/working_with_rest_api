@@ -22,6 +22,9 @@ class _NoteModifyState extends State<NoteModify> {
   String? errorMessage;
   Note? note;
 
+  TextEditingController _titleController = TextEditingController();
+
+
   @override
   void initState() {
     notesService.getNote(widget.noteID.toString()).then((response) {
@@ -45,7 +48,7 @@ class _NoteModifyState extends State<NoteModify> {
         padding: const EdgeInsets.all(12.0),
         child: Column(
           children: <Widget>[
-            const TextField(
+             const TextField(
               decoration: InputDecoration(hintText: 'Note title'),
             ),
             const SizedBox(
