@@ -19,7 +19,7 @@ class _NoteListState extends State<NoteList> {
 
  
   bool _isloading = false;
-
+  late APIResponse<List<NoteForListing>> _apiResponse;
 
   String formatDateTime(DateTime? dateTime){
     return '${dateTime!.day}/${dateTime.month}/${dateTime.year}';
