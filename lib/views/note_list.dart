@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:working_with_rest_api/models/api_response.dart';
 import 'package:working_with_rest_api/models/note_for_listing.dart';
 import 'package:working_with_rest_api/services/notes_service.dart';
 import 'package:working_with_rest_api/views/note_delete.dart';
@@ -16,13 +17,16 @@ class _NoteListState extends State<NoteList> {
 
   NotesService get service => GetIt.I<NotesService>();
 
+ 
+  bool _isloading = false;
+
+
   String formatDateTime(DateTime? dateTime){
     return '${dateTime!.day}/${dateTime.month}/${dateTime.year}';
   }
 
   @override
   void initState() {
-    
     super.initState();
   }
 
