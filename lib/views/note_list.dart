@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:working_with_rest_api/models/note_for_listing.dart';
+import 'package:working_with_rest_api/views/note_modify.dart';
 
 class NoteList extends StatelessWidget {
   NoteList({Key? key}) : super(key: key);
@@ -34,7 +35,9 @@ class NoteList extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('List of Notes')),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(builder: (_) => const NoteModify()));
+        },
         child: const Icon(Icons.add),
       ),
       body: ListView.separated(
