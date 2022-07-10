@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:working_with_rest_api/services/notes_service.dart';
 
 class NoteModify extends StatefulWidget {
   const NoteModify({Key? key, this.noteID}) : super(key: key);
@@ -12,6 +14,10 @@ class NoteModify extends StatefulWidget {
 
 class _NoteModifyState extends State<NoteModify> {
   bool get isEditing => widget.noteID != null;
+
+  NotesService get notesService => GetIt.I<NotesService>(); 
+
+
 
   @override
   Widget build(BuildContext context) {
